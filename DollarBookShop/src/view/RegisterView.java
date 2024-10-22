@@ -22,10 +22,8 @@ public class RegisterView extends viewTemplate {
 	public void start() {
 		mainLayout = new BorderPane();
 		Scene previousScene = getCurrStage().getScene();
-		double sceneWidth = previousScene.getWidth();
-		double sceneHeight = previousScene.getHeight();
 		
-		registerScene = new Scene(mainLayout, sceneWidth, sceneHeight); 
+		registerScene = new Scene(mainLayout, this.getWidth(), this.getHeight()); 
 		
 		Label registerLbl = new Label("Register");
 		registerLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
