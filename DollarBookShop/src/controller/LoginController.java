@@ -1,11 +1,68 @@
 package controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import model.User;
+import util.Connect;
 import view.LoginView;
 
 public class LoginController {
+	
+	private static Connect connect = Connect.getInstance();
 
 	public LoginController(LoginView view) {
+		view.getSignInBtn().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				validateLogin(view);
+			}
+		});
+	}
+	
+	public boolean validateLogin(LoginView view) {
+		String email = view.getEmailField().getText();
+		String password = view.getPasswdField().getText();
 		
+		ArrayList<User> users = getUserData();
+		
+		for(int i = 0; i < users.size(); i++) {
+			if((email.equals(users.get(i).getEmail())
+					&& password.equals(users.get(i).getPassword())) 
+					&& validateEmail(email)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public ArrayList<User> getUserData() {
+		ArrayList<User> users = new ArrayList<User>();
+		String query = "SELECT * FROM users";
+		connect.rs = connect.execQuery(query);
+		
+		try {
+			while(connect.rs.next()) {
+				String UserID = connect.rs.getString("UserID");
+				String Email = connect.rs.getString("Email");
+				String Username = connect.rs.getString("Username");
+				String Password = connect.rs.getString("Password");
+				Date DOB = connect.rs.getDate("DOB");
+				String Role = connect.rs.getString("Role");
+				
+				User user = new User(UserID, Email, Username, Password, DOB, Role);
+				
+				users.add(user);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return users;
 	}
 	
 	public boolean validateEmail(String email) {
@@ -32,10 +89,6 @@ public class LoginController {
 		
 		
 		return true;
-	}
-	
-	public void validatePassword(String password) {
-		
 	}
 
 }
