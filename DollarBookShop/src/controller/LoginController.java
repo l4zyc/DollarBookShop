@@ -5,13 +5,16 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert.AlertType;
 import model.User;
 import util.Connect;
+import util.func;
 import view.LoginView;
 
 public class LoginController {
 	
-	private static Connect connect = Connect.getInstance();
+	private Connect connect = Connect.getInstance();
+
 
 	public LoginController(LoginView view) {
 		view.getSignInBtn().setOnAction(new EventHandler<ActionEvent>() {
@@ -23,7 +26,15 @@ public class LoginController {
 		});
 	}
 	
-	public boolean validateLogin(LoginView view) {
+	public void checkRole(String role) {
+		if(role.equals("Customer")) {
+			
+		} else if(role.equals("Admin")) {
+			
+		}
+	}
+	
+	public void validateLogin(LoginView view) {
 		String email = view.getEmailField().getText();
 		String password = view.getPasswdField().getText();
 		
@@ -32,12 +43,13 @@ public class LoginController {
 		for(int i = 0; i < users.size(); i++) {
 			if((email.equals(users.get(i).getEmail())
 					&& password.equals(users.get(i).getPassword())) 
-					&& validateEmail(email)) {
-				return true;
+					) {
+				func.showAlert(AlertType.INFORMATION, "Information", "Logged In !");
+				return;
 			}
 		}
-		
-		return false;
+	
+		func.showAlert(AlertType.ERROR, "Error", "Invalid Credentials!");
 	}
 	
 	public ArrayList<User> getUserData() {
@@ -61,7 +73,6 @@ public class LoginController {
 		} catch (Exception e) {
 			
 		}
-		
 		return users;
 	}
 	

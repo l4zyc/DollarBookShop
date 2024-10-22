@@ -1,18 +1,19 @@
 package view;
 
+import controller.LoginController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -21,7 +22,8 @@ public class LoginView extends viewTemplate{
 	
 	Label loginLbl, emailLbl, passwordLbl, noAccountLbl;
 	BorderPane mainLayout;
-	TextField emailField, passwdField;
+	TextField emailField;
+	PasswordField passwdField;
 	GridPane loginLayout;
 	Scene loginScene;
 	Button signInBtn;
@@ -29,6 +31,7 @@ public class LoginView extends viewTemplate{
 	public LoginView(Stage stage) {
 		super(stage);
 		start();
+		new LoginController(this);
 	}
 
 	@Override
@@ -44,7 +47,7 @@ public class LoginView extends viewTemplate{
 		noAccountLbl = new Label("Don't have an Account ? Register Here!");
 		
 		emailField = new TextField();
-		passwdField = new TextField();
+		passwdField = new PasswordField();
 		
 		emailField.setPromptText("Email Address");
 		passwdField.setPromptText("Password");
@@ -143,11 +146,11 @@ public class LoginView extends viewTemplate{
 		this.emailField = emailField;
 	}
 
-	public TextField getPasswdField() {
+	public PasswordField getPasswdField() {
 		return passwdField;
 	}
 
-	public void setPasswdField(TextField passwdField) {
+	public void setPasswdField(PasswordField passwdField) {
 		this.passwdField = passwdField;
 	}
 
