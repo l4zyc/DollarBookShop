@@ -4,12 +4,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
 import model.User;
 import util.Connect;
 import util.func;
 import view.LoginView;
+import view.RegisterView;
 
 public class LoginController {
 	
@@ -22,6 +24,14 @@ public class LoginController {
 			@Override
 			public void handle(ActionEvent event) {
 				validateLogin(view);
+			}
+		});
+		
+		view.getNoAccountLbl().setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				new RegisterView(view.getCurrStage());
 			}
 		});
 	}
