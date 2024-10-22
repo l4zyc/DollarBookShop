@@ -41,10 +41,7 @@ public class LoginView extends viewTemplate{
 		mainLayout = new BorderPane();
 		loginLayout = new GridPane();
 		
-		Double width = Screen.getPrimary().getBounds().getWidth();
-		Double height = Screen.getPrimary().getBounds().getHeight();
-		
-		loginScene = new Scene(mainLayout, width, height);
+		loginScene = new Scene(mainLayout, this.getWidth(), this.getHeight());
 		
 		loginLbl = new Label("Login");
 		emailLbl = new Label("Email");
@@ -61,7 +58,7 @@ public class LoginView extends viewTemplate{
 	
 		arrangeComponent();
 		
-		this.getCurrStage().setScene(loginScene);
+		this.getStage().setScene(loginScene);
 	}
 	
 	public void arrangeComponent() {

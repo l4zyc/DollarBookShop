@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import model.User;
 import util.Connect;
 import util.func;
@@ -29,17 +31,21 @@ public class LoginController {
 		});
 		
 		view.getNoAccountLbl().setOnMouseClicked(e -> 
-					new RegisterView(view.getCurrStage())
+					new RegisterView(view.getStage())
 				);
+		
+		keyEventHandler(view);
 	}
 	
 	//Cek Role dari User antara Customer or Admin
-	public void checkRole(String role) {
+	public Integer checkRole(String role) {
 		if(role.equals("Customer")) {
-			
+			return 0;
 		} else if(role.equals("Admin")) {
-			
+			return 1;
 		}
+		
+		return -1;
 	}
 	
 	//Validasi Login
@@ -111,6 +117,28 @@ public class LoginController {
 		
 		
 		return true;
+	}
+	
+	public void keyEventHandler(LoginView view) {
+		view.getEmailField().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode().equals(KeyCode.ENTER)) {
+					view.getPasswdField().requestFocus();
+				}
+			}
+		});
+		
+		view.getPasswdField().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode().equals(KeyCode.ENTER)) {
+					validateLogin(view);
+				}
+			}
+		});
 	}
 
 }

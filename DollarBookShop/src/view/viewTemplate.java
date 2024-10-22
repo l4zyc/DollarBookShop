@@ -6,24 +6,30 @@ import javafx.stage.Stage;
 
 public abstract class viewTemplate {
 	
-	private Stage currStage;
+	private Stage stage;
 	private Double width;
 	private Double height;
 	
 	public viewTemplate(Stage stage) {
-		this.currStage = stage;
-		this.width = Screen.getPrimary().getBounds().getWidth();
-		this.height = Screen.getPrimary().getBounds().getHeight();
+		this.stage = stage;
+		Scene previousScene = getStage().getScene();
+        if (previousScene != null) {
+            this.width = previousScene.getWidth();
+            this.height = previousScene.getHeight();
+        } else {
+            this.width = Screen.getPrimary().getBounds().getWidth();
+            this.height = Screen.getPrimary().getBounds().getHeight();
+        }
 	}
 	
 	public abstract void start();
 
-	public Stage getCurrStage() {
-		return currStage;
+	public Stage getStage() {
+		return this.stage;
 	}
 
-	public void setCurrStage(Stage currStage) {
-		this.currStage = currStage;
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 
 	public Double getWidth() {

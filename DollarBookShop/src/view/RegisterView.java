@@ -21,7 +21,6 @@ public class RegisterView extends viewTemplate {
 	@Override
 	public void start() {
 		mainLayout = new BorderPane();
-		Scene previousScene = getCurrStage().getScene();
 		
 		registerScene = new Scene(mainLayout, this.getWidth(), this.getHeight()); 
 		
@@ -30,6 +29,6 @@ public class RegisterView extends viewTemplate {
 		mainLayout.setCenter(registerLbl);
 		BorderPane.setAlignment(registerLbl, Pos.CENTER);
 		
-		this.getCurrStage().setScene(registerScene);
+		this.getStage().setScene(registerScene);
 	}
 }
