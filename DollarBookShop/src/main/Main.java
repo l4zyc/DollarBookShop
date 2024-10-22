@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.LoginView;
+import view.RegisterView;
 
 public class Main extends Application{
 	
@@ -17,12 +18,11 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
 		new LoginView(stage);
-
-        stage.setResizable(false);
+		
 		stage.setTitle("Dollar Book Shop");
 		stage.show();
+		stage.setResizable(false);
 	}
 
 }
