@@ -8,14 +8,6 @@ public abstract class viewTemplate {
 	private Stage currStage;
 	private Scene scene;
 
-	public Scene getScene() {
-		return scene;
-	}
-
-	public void setScene(Scene scene) {
-		getCurrStage().setScene(scene);
-	}
-
 	public viewTemplate(Stage stage) {
 		this.currStage = stage;
 	}
@@ -30,4 +22,12 @@ public abstract class viewTemplate {
 		this.currStage = currStage;
 	}
 
+	public Scene getScene() {
+		return scene;
+	}
+
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+	
 }

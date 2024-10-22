@@ -11,23 +11,17 @@ public class Main extends Application{
 	Scene scene;
 	BorderPane mainLayout;
 	
-	public void init() {
-		mainLayout = new BorderPane();
-	}
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		init();
 		
-	
-		LoginView loginView = new LoginView(stage);
-	
+		new LoginView(stage);
+
+        stage.setResizable(false);
 		stage.setTitle("Dollar Book Shop");
-		stage.setResizable(false);
 		stage.show();
 	}
 

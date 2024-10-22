@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import main.Main;
 
 public class LoginView extends viewTemplate{
 	
@@ -39,7 +40,8 @@ public class LoginView extends viewTemplate{
 		mainLayout = new BorderPane();
 		loginLayout = new GridPane();
 		
-		loginScene = new Scene(mainLayout, getCurrStage().getMaxWidth(), getCurrStage().getMaxHeight());
+		loginScene = new Scene(mainLayout, getCurrStage().getMaxWidth(),
+				getCurrStage().getMaxHeight());
 		
 		loginLbl = new Label("Login");
 		emailLbl = new Label("Email");
@@ -57,7 +59,7 @@ public class LoginView extends viewTemplate{
 	
 		this.arrangeComponent();
 		
-		this.setScene(loginScene);
+		this.getCurrStage().setScene(loginScene);
 	}
 	
 	public void arrangeComponent() {
@@ -168,8 +170,8 @@ public class LoginView extends viewTemplate{
 
 	public void setSignInBtn(Button signInBtn) {
 		this.signInBtn = signInBtn;
-	}	
-	
+	}
+
 	
 }
 

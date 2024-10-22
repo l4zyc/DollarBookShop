@@ -15,9 +15,10 @@ import view.RegisterView;
 
 public class LoginController {
 	
+	//JDBC Connect
 	private Connect connect = Connect.getInstance();
-
-
+	
+	//Constructor
 	public LoginController(LoginView view) {
 		view.getSignInBtn().setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -27,15 +28,12 @@ public class LoginController {
 			}
 		});
 		
-		view.getNoAccountLbl().setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				new RegisterView(view.getCurrStage());
-			}
-		});
+		view.getNoAccountLbl().setOnMouseClicked(e -> 
+					new RegisterView(view.getCurrStage())
+				);
 	}
 	
+	//Cek Role dari User antara Customer or Admin
 	public void checkRole(String role) {
 		if(role.equals("Customer")) {
 			
@@ -44,6 +42,7 @@ public class LoginController {
 		}
 	}
 	
+	//Validasi Login
 	public void validateLogin(LoginView view) {
 		String email = view.getEmailField().getText();
 		String password = view.getPasswdField().getText();
@@ -62,6 +61,7 @@ public class LoginController {
 		func.showAlert(AlertType.ERROR, "Error", "Invalid Credentials!");
 	}
 	
+	//Ambil data user dari mySQL Server kemudian di simpan dalam ArrayList 
 	public ArrayList<User> getUserData() {
 		ArrayList<User> users = new ArrayList<User>();
 		String query = "SELECT * FROM users";
@@ -86,6 +86,7 @@ public class LoginController {
 		return users;
 	}
 	
+	//Validasi Email (Ex: example@gmail.com)
 	public boolean validateEmail(String email) {
 		Integer atIndex = email.indexOf('@');
 		
