@@ -12,8 +12,8 @@ public class Connect {
 	
 	private final String USERNAME = "root";
 	private final String PASSWORD = "";
-	private final String DATABASE = "DollarBookShop";
-	private final String HOSTNAME = "localhost:3307";
+	private final String DATABASE = "dollarbookshop";
+	private final String HOSTNAME = "localhost:3306";
 	private final String CONNECTION = String.format("jdbc:mysql://%s/%s", HOSTNAME, DATABASE);
 
 	private Connection con;

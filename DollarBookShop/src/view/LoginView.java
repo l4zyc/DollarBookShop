@@ -40,10 +40,11 @@ public class LoginView extends viewTemplate{
 	public void start() {
 		mainLayout = new BorderPane();
 		loginLayout = new GridPane();
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
 		
-		loginScene = new Scene(mainLayout, screenWidth, screenHeight);
+		Double width = Screen.getPrimary().getBounds().getWidth();
+		Double height = Screen.getPrimary().getBounds().getHeight();
+		
+		loginScene = new Scene(mainLayout, width, height);
 		
 		loginLbl = new Label("Login");
 		emailLbl = new Label("Email");
@@ -57,7 +58,6 @@ public class LoginView extends viewTemplate{
 		passwdField.setPromptText("Password");
 		
 		signInBtn = new Button("Sign in");
-		
 	
 		arrangeComponent();
 		
@@ -96,6 +96,7 @@ public class LoginView extends viewTemplate{
 		signInBtn.setMinHeight(35);
 		
 		loginLayout.setVgap(10);
+		mainLayout.setPadding(new Insets(150));
 		
 		BorderPane.setAlignment(loginLbl, Pos.CENTER);
 		loginLayout.setAlignment(Pos.CENTER);	

@@ -21,17 +21,17 @@ public class RegisterView extends viewTemplate {
 	@Override
 	public void start() {
 		mainLayout = new BorderPane();
+		Scene previousScene = getCurrStage().getScene();
+		double sceneWidth = previousScene.getWidth();
+		double sceneHeight = previousScene.getHeight();
 		
-		// Set up scene dimensions based on stage
-		registerScene = new Scene(mainLayout, getCurrStage().getWidth(), getCurrStage().getHeight());
+		registerScene = new Scene(mainLayout, sceneWidth, sceneHeight); 
 		
-		// Label for registration
 		Label registerLbl = new Label("Register");
 		registerLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
 		mainLayout.setCenter(registerLbl);
 		BorderPane.setAlignment(registerLbl, Pos.CENTER);
 		
-		// Set the scene on the current stage
 		this.getCurrStage().setScene(registerScene);
 	}
 }

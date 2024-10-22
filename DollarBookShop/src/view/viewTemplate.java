@@ -21,5 +21,5 @@ public abstract class viewTemplate {
 		this.currStage = currStage;
 	}
 
-	
+
 }
