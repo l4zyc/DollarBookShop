@@ -41,7 +41,7 @@ public class LoginView extends viewTemplate{
 		mainLayout = new BorderPane();
 		loginLayout = new GridPane();
 		
-		loginScene = new Scene(mainLayout, this.getWidth(), this.getHeight());
+		loginScene = new Scene(mainLayout, Main.width, Main.height);
 		
 		loginLbl = new Label("Login");
 		emailLbl = new Label("Email");
