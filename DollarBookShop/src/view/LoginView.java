@@ -93,7 +93,7 @@ public class LoginView extends viewTemplate{
 		signInBtn.setMinHeight(35);
 		
 		loginLayout.setVgap(10);
-		mainLayout.setPadding(new Insets(150));
+		mainLayout.setPadding(new Insets(280));
 		
 		BorderPane.setAlignment(loginLbl, Pos.CENTER);
 		loginLayout.setAlignment(Pos.CENTER);	
