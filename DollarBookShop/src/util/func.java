@@ -37,4 +37,16 @@ public abstract class func {
 		
 		return true;
 	}
+	
+	public static boolean isAlphanumeric(String word) {
+		for(int i = 0; i < word.length(); i++) {
+			Character chara = word.charAt(i);
+			
+			if(!(Character.isAlphabetic(chara)) || !(Character.isDigit(chara))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

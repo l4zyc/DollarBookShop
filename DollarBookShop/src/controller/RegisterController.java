@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javafx.scene.control.ListView;
 import model.User;
 import util.Connect;
 import util.func;
@@ -75,6 +76,10 @@ public class RegisterController {
 		return ID;
 	}
 	
+	public void insertData() {
+		
+	}
+	
 	public void validateRegister() {
 		ArrayList<User> users = getData();
 		String email = view.getEmailField().getText();
@@ -82,13 +87,49 @@ public class RegisterController {
 		String password = view.getPasswdField().getText();
 		String confPasswd = view.getConfPasswdField().getText();
 		LocalDate localDate = view.getDOBPicker().getValue();
-		Date DOB = Date.valueOf(localDate);
 		
 		if(!func.validateEmail(email)) {
 			return;
 		}
 		
+		if(username.length() < 5 && !(IsUsernameUnique(users, username))) {
+			return;
+		}
+		
+		if(password.length() < 8 && func.isAlphanumeric(password)) {
+			return;
+		}
+		
+		if(!confPasswd.equals(password)) {
+			return;
+		}
+
 		
 	}
-
+	
+	public boolean IsUsernameUnique(ArrayList<User> users, String username) {
+		for (User user : users) {
+			if(user.getUsername().equals(username)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean isEmailUnique(ArrayList<User> users, String email) {
+		for (User user : users) {
+			if(user.getEmail().equals(email)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	public boolean validateAge(Integer minAge, LocalDate date) {
+		
+		return false;
+	}
 }
