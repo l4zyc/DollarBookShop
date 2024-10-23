@@ -61,6 +61,7 @@ public class LoginView extends viewTemplate{
 		this.getStage().setScene(loginScene);
 	}
 	
+	@Override
 	public void arrangeComponent() {
 		loginLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
 		emailLbl.setFont(Font.font("Arial" , FontWeight.BOLD, 15));
