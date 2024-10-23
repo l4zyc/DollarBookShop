@@ -23,6 +23,7 @@ public abstract class viewTemplate {
 	}
 	
 	public abstract void start();
+	public abstract void arrangeComponent();
 
 	public Stage getStage() {
 		return this.stage;

@@ -64,7 +64,7 @@ public class LoginController {
 			}
 		}
 	
-		func.showAlert(AlertType.ERROR, "Error", "Invalid Credentials!");
+		func.showAlert(AlertType.WARNING, "Warning", "Invalid Credentials!");
 	}
 	
 	//Ambil data user dari mySQL Server kemudian di simpan dalam ArrayList 
