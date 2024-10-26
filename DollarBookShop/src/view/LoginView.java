@@ -82,7 +82,7 @@ public class LoginView extends viewTemplate{
 				));
 		
 		GridPane.setHalignment(noAccountLbl, HPos.CENTER);
-		noAccountLbl.setStyle("-fx-text-fill: BLUE");
+		noAccountLbl.setTextFill(Color.BLUE);
 		
 		emailField.setMinWidth(300);
 		emailField.setMinHeight(35);
