@@ -22,9 +22,9 @@ import main.Main;
 
 public class LoginView extends viewTemplate{
 	
-	Label loginLbl, emailLbl, passwordLbl, noAccountLbl;
-	BorderPane mainLayout;
-	TextField emailField;
+	private Label loginLbl, emailLbl, passwordLbl, noAccountLbl;
+	private BorderPane mainLayout;
+	private TextField emailField;
 	PasswordField passwdField;
 	GridPane loginLayout;
 	Scene loginScene;
