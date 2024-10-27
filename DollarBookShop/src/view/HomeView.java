@@ -22,9 +22,6 @@ public class HomeView extends HomeViewTemplate {
     private User user;
     
     private Label welcomeLbl;
-    private MenuBar mb; 
-    private Menu actionMenu;
-    private MenuItem home, cart, logout;
     
     public HomeView(Stage stage, User user) {
         super(stage, user);
