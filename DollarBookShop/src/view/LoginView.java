@@ -67,8 +67,8 @@ public class LoginView extends viewTemplate{
 	@Override
 	public void arrangeComponent() {
 		loginLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
-		emailLbl.setFont(Font.font("Arial" , FontWeight.BOLD, 15));
-		passwordLbl.setFont(Font.font("Arial" , FontWeight.BOLD, 15));
+		emailLbl.setFont(Font.font("Arial" , FontWeight.BOLD, 16));
+		passwordLbl.setFont(Font.font("Arial" , FontWeight.BOLD, 16));
 		
 		mainLayout.setTop(loginLbl);
 		mainLayout.setCenter(loginLayout);
