@@ -103,6 +103,12 @@ public class RegisterController {
 		if(!confPasswd.equals(password)) {
 			return;
 		}
+		
+		if(validateAge(18, localDate)) {
+			return;
+		}
+		
+		
 
 		
 	}
@@ -128,8 +134,26 @@ public class RegisterController {
 	}
 	
 	
-	public boolean validateAge(Integer minAge, LocalDate date) {
+	public boolean validateAge(Integer minAge, LocalDate DOB) {
 		
-		return false;
+		LocalDate currDate =LocalDate.now();
+		
+		Integer birthYear = DOB.getYear();
+		Integer currYear = currDate.getYear();
+		
+		Integer age = currYear - birthYear;
+		
+		if(age > minAge) {
+			return false;
+		}
+		
+		if(age == minAge) {
+            if (currDate.getMonthValue() > DOB.getMonthValue() ||
+                    (currDate.getMonthValue() == DOB.getMonthValue() && currDate.getDayOfMonth() >= DOB.getDayOfMonth())) {
+                    return false;
+                }
+		}
+		
+		return true;
 	}
 }

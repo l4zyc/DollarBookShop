@@ -256,6 +256,4 @@ public class RegisterView extends viewTemplate {
 	public void setSignUpBtn(Button signUpBtn) {
 		this.signUpBtn = signUpBtn;
 	}
-	
-	
 }
