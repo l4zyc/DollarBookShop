@@ -67,8 +67,6 @@ public class HomeView extends HomeViewTemplate {
         String baseText = "Welcome, ";
         String username = user.getUsername();
         Timeline timeline = new Timeline();
-        
-        
 
         for (int i = 0; i <= username.length(); i++) {
             int index = i;
@@ -77,13 +75,10 @@ public class HomeView extends HomeViewTemplate {
             timeline.getKeyFrames().add(keyFrame);
         }
         
-        KeyFrame delayFrame = new KeyFrame(Duration.millis(200 * username.length() + 5000),
-                e -> {});
-        timeline.getKeyFrames().add(delayFrame);
         
         for (int i = username.length(); i >= 0; i--) {
             int index = i;
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(200 * username.length() + 5000 + 200 * (username.length() - i)), 
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(200 * username.length() + 2000 + 200 * (username.length() - i)), 
                     e -> welcomeLbl.setText(baseText + username.substring(0, index)));
             timeline.getKeyFrames().add(keyFrame);
         }
