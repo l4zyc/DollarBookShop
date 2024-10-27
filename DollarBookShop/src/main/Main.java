@@ -13,9 +13,6 @@ public class Main extends Application{
 	Scene scene;
 	BorderPane mainLayout;
 	
-	public static final Double width = Screen.getPrimary().getBounds().getWidth();
-	public static final Double height = Screen.getPrimary().getBounds().getHeight();
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -25,7 +22,7 @@ public class Main extends Application{
 		new LoginView(stage);
 		
 		stage.setTitle("Dollar Book Shop");
-		stage.setFullScreen(false);
+		stage.setMaximized(true);
 		stage.setResizable(false);
 		stage.show();
 	}

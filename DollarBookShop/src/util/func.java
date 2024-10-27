@@ -15,7 +15,7 @@ public abstract class func {
 		
 		alert.showAndWait();
 	}
-	
+
 	public static String getLastId() {
 		String query = "SELECT * FROM users "
 				+ "ORDER BY UserID "
@@ -39,5 +39,42 @@ public abstract class func {
 		}
 		
 		return latestID;
+	}
+	public static boolean validateEmail(String email) {
+		Integer atIndex = email.indexOf('@');
+		
+		if(atIndex == -1) {
+			return false;
+		}
+		
+		Integer dotIndex = email.indexOf('.', atIndex);
+		Integer domainIndex = email.indexOf("gmail", atIndex);
+		
+		if(dotIndex == -1) {
+			return false;
+		}
+		
+		if(dotIndex == 0 || atIndex == email.length() - 1) {
+			return false;
+		}
+		
+		if(domainIndex > dotIndex) {
+			return false;
+		}
+		
+		
+		return true;
+	}
+	
+	public static boolean isAlphanumeric(String word) {
+		for(int i = 0; i < word.length(); i++) {
+			Character chara = word.charAt(i);
+			
+			if(!(Character.isAlphabetic(chara)) || !(Character.isDigit(chara))) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }
