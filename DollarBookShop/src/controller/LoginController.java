@@ -53,7 +53,7 @@ public class LoginController {
 		String email = view.getEmailField().getText();
 		String password = view.getPasswdField().getText();
 		
-		ArrayList<User> users = getUserData();
+		ArrayList<User> users = getUserListData();
 		
 		for(int i = 0; i < users.size(); i++) {
 			if((email.equals(users.get(i).getEmail())
@@ -68,7 +68,7 @@ public class LoginController {
 	}
 	
 	//Ambil data user dari mySQL Server kemudian di simpan dalam ArrayList 
-	public ArrayList<User> getUserData() {
+	public ArrayList<User> getUserListData() {
 		ArrayList<User> users = new ArrayList<User>();
 		String query = "SELECT * FROM users";
 		connect.rs = connect.execQuery(query);
