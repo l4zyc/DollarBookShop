@@ -52,5 +52,14 @@ public class Connect {
 		
 		return rs;
 	}
+	
+	public void execUpdate(String query) {
+		try {
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

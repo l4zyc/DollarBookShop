@@ -2,12 +2,24 @@ package util;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javafx.scene.control.Alert.AlertType;
 import model.User;
 
 public class Data {
 	
 	private Connect connect = Connect.getInstance();
+	
+	public void insertUser(User user) {
+		String query = String.format("INSERT INTO MsUser VALUES ("
+				+ "%s %s %s %s %s %s"
+				+ ")", user.getUserID(), user.getEmail(), user.getUsername(),
+				user.getPassword(), user.getDate().toString(), user.getRole());
+		
+		connect.execUpdate(query);
+		func.showAlert(AlertType.INFORMATION, "User", "User Added!");
+	}
 	
 	public User getUserData(String email, String password) throws NullPointerException { 
 		
@@ -36,6 +48,55 @@ public class Data {
 		}
 		
 		return null;
+	}
+	
+	public ArrayList<User> getListData() {
+		String query = "SELECT * FROM users";
+		
+		
+		ArrayList<User> users = new ArrayList<User>();
+		connect.rs = connect.execQuery(query);
+		
+		try {
+			while(connect.rs.next()) {
+				String ID = connect.rs.getString("UserID");
+				String email = connect.rs.getString("Email");
+				String username = connect.rs.getString("Username");
+				String passwd = connect.rs.getString("Password");
+				Date date = connect.rs.getDate("DOB");
+				String role = connect.rs.getString("Role");
+				
+				users.add(new User(ID, email, username, passwd, date, role));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return users;
+	}
+	
+	public String setNewUserID() {
+		String ID = null;
+		String query = "SELECT UserID FROM MsUser "
+				+ "ORDER BY UserID "
+				+ "DESC LIMIT 1";
+		
+		try {
+			if(!connect.rs.next()) {
+				return "US001";
+			}
+			
+			ID = connect.rs.getString("UserID");
+			Integer num = Integer.parseInt(ID.substring(2));
+			ID = String.format("US%03d", (num + 1));
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ID;
 	}
 
 }

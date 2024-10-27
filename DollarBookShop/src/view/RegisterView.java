@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -16,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -32,7 +32,8 @@ public class RegisterView extends viewTemplate {
 	private Label registerLbl, emailLbl, usernameLbl, passwdLbl, confPasswdLbl,
 	DOBLbl, accountExistLbl;
 	
-	private TextField emailField, usernameField, passwdField, confPasswdField;
+	private TextField emailField, usernameField;
+	private PasswordField passwdField, confPasswdField;  // Changed to PasswordField
 	
 	private DatePicker DOBPicker;
 	
@@ -43,23 +44,37 @@ public class RegisterView extends viewTemplate {
 		this.width = stage.getWidth();
 		this.height = stage.getHeight();
 		start();
+		arrangeComponent();
 		new RegisterController(this);
 	}
 
 	@Override
 	public void start() {
-		mainLayout = new BorderPane();
+        mainLayout = new BorderPane();
+		registerLayout = new GridPane();
+		buttonLayout = new VBox();
+		emailField = new TextField();
+		usernameField = new TextField();
+		passwdField = new PasswordField();       // Instantiated as PasswordField
+		confPasswdField = new PasswordField();   // Instantiated as PasswordField
+		DOBPicker = new DatePicker();
+		signUpBtn = new Button("Sign Up");
 		
-		registerScene = new Scene(mainLayout, width, height); 
+		registerScene = new Scene(mainLayout, width, height);
 		registerLbl = new Label("Register");
-
+		
+        emailLbl = new Label("Email");
+        usernameLbl = new Label("Username");
+        passwdLbl = new Label("Password");
+        confPasswdLbl = new Label("Confirm Password");
+        DOBLbl = new Label("Date Of Birth");
+        accountExistLbl = new Label("Already have an account?");
 	}
 	
 
 	@Override
 	public void arrangeComponent() {
-		// TODO Auto-generated method stub
-		registerLbl = new Label("Register");
+		
 		registerLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
 		
 		registerLayout.add(emailLbl, 0, 0);
@@ -81,13 +96,13 @@ public class RegisterView extends viewTemplate {
 		registerLayout.add(buttonLayout, 0, 10);
 		registerLayout.setVgap(10);
 		
-		//Set Prompt TExt for Text Field
+		// Set Prompt Text for Text Fields
 		emailField.setPromptText("Email Address");
 		usernameField.setPromptText("Username");
 		passwdField.setPromptText("Password");
 		confPasswdField.setPromptText("Confirm Password");
 		
-		//Set TextField and DatePicker Width and Height
+		// Set TextField and DatePicker Width and Height
 		emailField.setMinWidth(300);
 		emailField.setMinHeight(35);
 		
@@ -96,12 +111,12 @@ public class RegisterView extends viewTemplate {
 		confPasswdField.setMinHeight(35);
 		DOBPicker.setMinHeight(35);
 		
-		//Font Size
-		emailLbl.setFont(Font.font("Arial",FontWeight.BOLD, 15));
-		usernameLbl.setFont(Font.font("Arial",FontWeight.BOLD, 15));
-		passwdLbl.setFont(Font.font("Arial",FontWeight.BOLD, 15));
-		confPasswdLbl.setFont(Font.font("Arial",FontWeight.BOLD, 15));
-		DOBLbl.setFont(Font.font("Arial",FontWeight.BOLD, 15));
+		// Font Size
+		emailLbl.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		usernameLbl.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		passwdLbl.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		confPasswdLbl.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		DOBLbl.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 		
 		signUpBtn.setMinWidth(300);
 		signUpBtn.setMinHeight(40);
@@ -225,19 +240,19 @@ public class RegisterView extends viewTemplate {
 		this.usernameField = usernameField;
 	}
 
-	public TextField getPasswdField() {
+	public PasswordField getPasswdField() {
 		return passwdField;
 	}
 
-	public void setPasswdField(TextField passwdField) {
+	public void setPasswdField(PasswordField passwdField) {
 		this.passwdField = passwdField;
 	}
 
-	public TextField getConfPasswdField() {
+	public PasswordField getConfPasswdField() {
 		return confPasswdField;
 	}
 
-	public void setConfPasswdField(TextField confPasswdField) {
+	public void setConfPasswdField(PasswordField confPasswdField) {
 		this.confPasswdField = confPasswdField;
 	}
 

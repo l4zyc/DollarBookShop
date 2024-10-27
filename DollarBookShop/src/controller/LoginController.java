@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import model.User;
 import util.Connect;
 import util.func;
@@ -31,18 +32,22 @@ public class LoginController {
 			}
 		});
 		
-		view.getNoAccountLbl().setOnMouseClicked(e -> 
-					new RegisterView(view.getStage())
-				);
+		view.getNoAccountLbl().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				new RegisterView(view.getStage());
+			}
+		});
 		
 		keyEventHandler(view);
 	}
 	
 	//Cek Role dari User antara Customer or Admin
 	public Integer checkRole(String role) {
-		if(role.equals("Customer")) {
+		if(role.equals("user")) {
 			return 0;
-		} else if(role.equals("Admin")) {
+		} else if(role.equals("admin")) {
 			return 1;
 		}
 		
@@ -57,11 +62,23 @@ public class LoginController {
 		ArrayList<User> users = getUserListData();
 		
 		for(int i = 0; i < users.size(); i++) {
-			if((email.equals(users.get(i).getEmail())
-					&& password.equals(users.get(i).getPassword())) 
+			User user = users.get(i);
+			if((email.equals(user.getEmail())
+					&& password.equals(user.getPassword())) 
 					) {
+				
 				func.showAlert(AlertType.INFORMATION, "Information", "Logged In !");
-				new HomeView(view.getStage());
+				
+				switch(checkRole(user.getRole())) {
+				case 0:
+					new HomeView(view.getStage(), user);
+					break;
+				case 1:
+					break;
+				default:
+					break;
+				}
+				
 				return;
 			}
 		}

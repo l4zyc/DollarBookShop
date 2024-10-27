@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import model.User;
 import util.Connect;
+import util.Data;
 import util.func;
 import view.RegisterView;
 
@@ -15,40 +19,23 @@ public class RegisterController {
 	
 	private RegisterView view;
 	private Connect connect = Connect.getInstance();
+	private Data data = new Data();
 
 	public RegisterController(RegisterView view) {
 		this.view = view;
 		onActionHandler();
 	}
+
 	
 	public void onActionHandler() {
-		
-	}
-	
-	public ArrayList<User> getData() {
-		String query = "SELECT * FROM users";
-		
-		
-		ArrayList<User> users = new ArrayList<User>();
-		connect.rs = connect.execQuery(query);
-		
-		try {
-			while(connect.rs.next()) {
-				String ID = connect.rs.getString("UserID");
-				String email = connect.rs.getString("Email");
-				String username = connect.rs.getString("Username");
-				String passwd = connect.rs.getString("Password");
-				Date date = connect.rs.getDate("DOB");
-				String role = connect.rs.getString("Role");
-				
-				users.add(new User(ID, email, username, passwd, date, role));
+		view.getSignUpBtn().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				validateRegister();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return users;
+		});
 	}
 	
 	public String newID() {
@@ -75,13 +62,10 @@ public class RegisterController {
 		
 		return ID;
 	}
-	
-	public void insertData() {
-		
-	}
+
 	
 	public void validateRegister() {
-		ArrayList<User> users = getData();
+		ArrayList<User> users = data.getListData();
 		String email = view.getEmailField().getText();
 		String username = view.getUsernameField().getText();
 		String password = view.getPasswdField().getText();
@@ -89,28 +73,38 @@ public class RegisterController {
 		LocalDate localDate = view.getDOBPicker().getValue();
 		
 		if(!func.validateEmail(email)) {
+			func.showAlert(AlertType.WARNING, "Warning", "Email Invalid");
 			return;
 		}
 		
-		if(username.length() < 5 && !(IsUsernameUnique(users, username))) {
+		if(username.length() < 5 || !(IsUsernameUnique(users, username))) {
+			func.showAlert(AlertType.WARNING, "Warning", "Username Invalid");
 			return;
 		}
 		
-		if(password.length() < 8 && func.isAlphanumeric(password)) {
+		if(password.length() < 8 || func.isNotAlphanumeric(password)) {
+			func.showAlert(AlertType.WARNING, "Warning", "Password Invalid");
 			return;
 		}
 		
 		if(!confPasswd.equals(password)) {
+			func.showAlert(AlertType.WARNING, "Warning", "Password Doesnt Match");
 			return;
 		}
 		
-		if(validateAge(18, localDate)) {
+		try {
+			if(validateAge(18, localDate)) {
+				func.showAlert(AlertType.WARNING, "Warning", "User is under 18");
+				return;
+			}
+		} catch (Exception e) {
+			func.showAlert(AlertType.ERROR, "Error", "Date is Null");
 			return;
 		}
+	
+		Date DOB = Date.valueOf(localDate);
 		
-		
-
-		
+		data.insertUser(new User(data.setNewUserID(), email, username, password, DOB, "user"));
 	}
 	
 	public boolean IsUsernameUnique(ArrayList<User> users, String username) {
