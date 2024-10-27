@@ -17,8 +17,9 @@ import model.User;
 public class HomeView extends HomeViewTemplate {
 
     private Scene scene;
-    private BorderPane mainLayout;
+    private BorderPane mainLayout, homeLayout;
     private User user;
+
     
     private Label welcomeLbl;
     
