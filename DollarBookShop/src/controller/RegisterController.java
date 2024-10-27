@@ -13,6 +13,7 @@ import model.User;
 import util.Connect;
 import util.Data;
 import util.func;
+import view.LoginView;
 import view.RegisterView;
 
 public class RegisterController {
@@ -105,6 +106,7 @@ public class RegisterController {
 		Date DOB = Date.valueOf(localDate);
 		
 		data.insertUser(new User(data.setNewUserID(), email, username, password, DOB, "user"));
+		new LoginView(view.getStage());
 	}
 	
 	public boolean IsUsernameUnique(ArrayList<User> users, String username) {

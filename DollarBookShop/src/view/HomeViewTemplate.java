@@ -10,6 +10,8 @@ public abstract class HomeViewTemplate extends viewTemplate{
 	public HomeViewTemplate(Stage stage, User user) {
 		super(stage);
 		this.user = user;
+		this.width = stage.getWidth();
+		this.height = stage.getHeight();
 	}
 
 

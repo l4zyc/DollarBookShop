@@ -12,10 +12,9 @@ public class Data {
 	private Connect connect = Connect.getInstance();
 	
 	public void insertUser(User user) {
-		String query = String.format("INSERT INTO MsUser VALUES ("
-				+ "%s %s %s %s %s %s"
-				+ ")", user.getUserID(), user.getEmail(), user.getUsername(),
-				user.getPassword(), user.getDate().toString(), user.getRole());
+	    String query = String.format("INSERT INTO users VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+	            user.getUserID(), user.getEmail(), user.getUsername(),
+	            user.getPassword(), user.getDate().toString(), user.getRole());
 		
 		connect.execUpdate(query);
 		func.showAlert(AlertType.INFORMATION, "User", "User Added!");
@@ -23,7 +22,7 @@ public class Data {
 	
 	public User getUserData(String email, String password) throws NullPointerException { 
 		
-		String query = "SELECT * FROM MsUser";
+		String query = "SELECT * FROM users";
 		
 		connect.rs = connect.execQuery(query);
 		User user = null;
@@ -78,17 +77,20 @@ public class Data {
 	
 	public String setNewUserID() {
 		String ID = null;
-		String query = "SELECT UserID FROM MsUser "
+		String query = "SELECT UserID FROM users "
 				+ "ORDER BY UserID "
 				+ "DESC LIMIT 1";
 		
+		connect.rs = connect.execQuery(query);
+		
 		try {
-			if(!connect.rs.next()) {
+			if((!connect.rs.next())) {
 				return "US001";
 			}
 			
 			ID = connect.rs.getString("UserID");
 			Integer num = Integer.parseInt(ID.substring(2));
+			
 			ID = String.format("US%03d", (num + 1));
 			
 		} catch (Exception e) {
