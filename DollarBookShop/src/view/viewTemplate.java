@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 public abstract class viewTemplate {
 	
 	private Stage stage;
-	protected final Double width = getStage().getWidth();
-	protected final Double height = getStage().getHeight();
+	protected Double width;
+	protected Double height;
 	
 	public viewTemplate(Stage stage) {
 		this.stage = stage;

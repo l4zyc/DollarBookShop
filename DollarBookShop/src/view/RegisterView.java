@@ -40,6 +40,8 @@ public class RegisterView extends viewTemplate {
 
 	public RegisterView(Stage stage) {
 		super(stage);
+		this.width = stage.getWidth();
+		this.height = stage.getHeight();
 		start();
 		new RegisterController(this);
 	}

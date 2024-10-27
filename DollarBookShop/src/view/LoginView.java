@@ -32,6 +32,9 @@ public class LoginView extends viewTemplate{
 
 	public LoginView(Stage stage) {
 		super(stage);
+		this.width = stage.getWidth();
+		this.height = stage.getHeight();
+		
 		start();
 		new LoginController(this);
 	}
