@@ -66,7 +66,7 @@ public class RegisterController {
 
 	
 	public void validateRegister() {
-		ArrayList<User> users = data.getListData();
+		ArrayList<User> users = data.getUserListData();
 		String email = view.getEmailField().getText();
 		String username = view.getUsernameField().getText();
 		String password = view.getPasswdField().getText();

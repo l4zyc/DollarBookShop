@@ -7,11 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Product;
 import model.User;
 
 public class HomeView extends HomeViewTemplate {
@@ -19,7 +23,10 @@ public class HomeView extends HomeViewTemplate {
     private Scene scene;
     private BorderPane mainLayout, homeLayout;
     private User user;
-
+    
+    private TableView<Product> product_table;
+    private TableColumn<Product, String> ProductID, ProductName, ProductGenre;
+    private TableColumn<Product, Integer> ProductStock, ProductPrice;
     
     private Label welcomeLbl;
     
@@ -30,6 +37,15 @@ public class HomeView extends HomeViewTemplate {
         start();
         arrangeComponent();
         startTypingAnimation();
+    }
+    
+    public void setTable() {
+    	product_table = new TableView<>();
+    	
+    	ProductID = new TableColumn<>("ProductID");
+    	ProductID.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductID"));
+    	
+    	
     }
 
     @Override

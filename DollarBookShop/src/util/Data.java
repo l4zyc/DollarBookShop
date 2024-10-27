@@ -49,7 +49,7 @@ public class Data {
 		return null;
 	}
 	
-	public ArrayList<User> getListData() {
+	public ArrayList<User> getUserListData() {
 		String query = "SELECT * FROM users";
 		
 		
@@ -94,6 +94,31 @@ public class Data {
 			ID = String.format("US%03d", (num + 1));
 			
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ID;
+	}
+	
+	public String setNewProductID() {
+		String ID = null;
+		String query = "SELECT ProductID FROM products"
+				+ " ORDER BY ProductID DESC "
+				+ "LIMIT 1";
+		
+		connect.rs = connect.execQuery(query);
+		
+		try {
+			if(!connect.rs.next()) {
+				return "PD001";
+			}
+			
+			ID = connect.rs.getString("ProductID");
+			Integer num = Integer.parseInt(ID.substring(2));
+			
+			ID = String.format("PD%03d", (num + 1));
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
