@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import model.User;
 import util.Connect;
 import util.func;
+import view.HomeView;
 import view.LoginView;
 import view.RegisterView;
 
@@ -60,6 +61,7 @@ public class LoginController {
 					&& password.equals(users.get(i).getPassword())) 
 					) {
 				func.showAlert(AlertType.INFORMATION, "Information", "Logged In !");
+				new HomeView(view.getStage());
 				return;
 			}
 		}
