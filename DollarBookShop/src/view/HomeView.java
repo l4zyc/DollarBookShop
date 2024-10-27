@@ -1,7 +1,6 @@
 package view;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
