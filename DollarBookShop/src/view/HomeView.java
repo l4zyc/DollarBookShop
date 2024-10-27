@@ -33,7 +33,7 @@ public class HomeView extends HomeViewTemplate{
 	@Override
 	public void start() {
 		mainLayout = new BorderPane();
-		scene = new Scene(mainLayout);
+		scene = new Scene(mainLayout, width, height);
 		
 		welcomeLbl = new Label(String.format("Welcome, %s", user.getUsername()));
 		mb = new MenuBar();
