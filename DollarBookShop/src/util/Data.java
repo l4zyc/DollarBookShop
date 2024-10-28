@@ -4,7 +4,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
+import model.Product;
 import model.User;
 
 public class Data {
@@ -124,6 +127,30 @@ public class Data {
 		}
 		
 		return ID;
+	}
+	
+	public ObservableList<Product> getProductListData() {
+		String query = "SELECT * FROM products";
+		ObservableList<Product> products = FXCollections.observableArrayList();
+		
+		connect.rs = connect.execQuery(query);
+		
+		try {
+			while(connect.rs.next()) {
+				String ID = connect.rs.getString("ProductID");
+				String Name = connect.rs.getString("Name");
+				String Genre = connect.rs.getString("Genre");
+				Integer Stock = connect.rs.getInt("Stock");
+				Integer Price = connect.rs.getInt("Price");
+				
+				products.add(new Product(ID, Name, Genre, Stock, Price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return products;
 	}
 
 }

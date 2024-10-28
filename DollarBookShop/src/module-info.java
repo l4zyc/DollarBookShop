@@ -7,6 +7,7 @@ module DollarBookShop {
 	requires mysql.connector.java;
 	
 	opens main to javafx.fxml, javafx.graphics;
+	opens model to javafx.base;
 	
 	exports main;
 }
