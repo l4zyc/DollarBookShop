@@ -112,7 +112,6 @@ public class HomeView extends HomeViewTemplate {
         addCartBtn.setPadding(new Insets(20));
         addCartBtn.setMinWidth(350);
         
-        
         mainLayout.setTop(mb);
         mainLayout.setCenter(homeLayout);
         

@@ -22,6 +22,7 @@ public class Main extends Application{
 		new LoginView(stage);
 		
 		stage.setTitle("Dollar Book Shop");
+		stage.setResizable(false);
 		stage.setMaximized(true);
 		stage.show();
 	}
