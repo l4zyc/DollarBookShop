@@ -109,7 +109,7 @@ public class HomeView extends HomeViewTemplate {
         addCartBtn.setTextFill(Color.WHITE);
         addCartBtn.setBackground(new Background(
         		new BackgroundFill(Color.DARKGRAY, null, null)));
-        addCartBtn.setPadding(new Insets(25));
+        addCartBtn.setPadding(new Insets(20));
         addCartBtn.setMinWidth(350);
         
         
@@ -123,7 +123,7 @@ public class HomeView extends HomeViewTemplate {
       
         welcomeLbl.setPadding(new Insets(10, 0, 10, 0));
         
-        this.getStage().setScene(scene);
+        getStage().setScene(scene);
     }
     
     private void startTypingAnimation() {
