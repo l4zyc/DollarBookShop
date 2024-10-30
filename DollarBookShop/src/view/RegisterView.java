@@ -41,8 +41,6 @@ public class RegisterView extends viewTemplate {
 
 	public RegisterView(Stage stage) {
 		super(stage);
-		this.width = stage.getWidth();
-		this.height = stage.getHeight();
 		start();
 		arrangeComponent();
 		new RegisterController(this);
@@ -60,7 +58,7 @@ public class RegisterView extends viewTemplate {
 		DOBPicker = new DatePicker();
 		signUpBtn = new Button("Sign Up");
 		
-		registerScene = new Scene(mainLayout, width, height);
+		registerScene = new Scene(mainLayout);
 		registerLbl = new Label("Register");
 		
         emailLbl = new Label("Email");

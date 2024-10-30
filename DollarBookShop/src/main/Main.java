@@ -23,7 +23,8 @@ public class Main extends Application{
 		
 		stage.setTitle("Dollar Book Shop");
 		stage.setResizable(false);
-		stage.setMaximized(true);
+		stage.setHeight(stage.getMaxHeight());
+		stage.setWidth(stage.getMaxWidth());
 		stage.show();
 	}
 

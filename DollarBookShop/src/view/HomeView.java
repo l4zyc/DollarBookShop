@@ -45,6 +45,7 @@ public class HomeView extends HomeViewTemplate {
         super(stage, user);
         this.user = user;
         
+        
         start();
         setTable();
         arrangeComponent();
@@ -85,7 +86,7 @@ public class HomeView extends HomeViewTemplate {
     public void start() {
         mainLayout = new BorderPane();
         homeLayout = new BorderPane();
-        scene = new Scene(mainLayout, width, height);
+        scene = new Scene(mainLayout);
         
         welcomeLbl = new Label();
         welcomeLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
@@ -117,8 +118,9 @@ public class HomeView extends HomeViewTemplate {
         
         homeLayout.setTop(welcomeLbl);
         homeLayout.setCenter(product_table);
-        homeLayout.setBottom(addCartBtn);
-        BorderPane.setAlignment(addCartBtn, Pos.CENTER);
+        HBox buttonBox = new HBox(addCartBtn);
+        buttonBox.setAlignment(Pos.CENTER);
+        homeLayout.setBottom(buttonBox);
       
         welcomeLbl.setPadding(new Insets(10, 0, 10, 0));
         
