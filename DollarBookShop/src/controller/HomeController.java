@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Optional;
+import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,12 +12,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import main.Main;
 import view.HomeView;
 import view.LoginView;
 
 public class HomeController {
 	
 	private HomeView view;
+	private Preferences pref = Preferences.userNodeForPackage(Main.class);
 	
 	public HomeController(HomeView view) {
 		this.view = view;
@@ -37,6 +40,7 @@ public class HomeController {
 				Optional op = alert.showAndWait();
 				
 				if(op.get().equals(ButtonType.OK)) {
+					pref.remove("lastEmail");
 					new LoginView(view.getStage());	
 				}
 			}

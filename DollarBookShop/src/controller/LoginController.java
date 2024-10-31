@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import main.Main;
 import model.User;
 import util.Connect;
 import util.func;
@@ -21,6 +23,7 @@ public class LoginController {
 	
 	//JDBC Connect
 	private Connect connect = Connect.getInstance();
+	private Preferences pref = Preferences.userNodeForPackage(Main.class);
 	
 	//Constructor
 	public LoginController(LoginView view) {
@@ -68,7 +71,8 @@ public class LoginController {
 					) {
 				
 				func.showAlert(AlertType.INFORMATION, "Information", "Logged In !");
-				
+				pref.put("lastEmail", view.getEmailField().getText());
+			
 				switch(checkRole(user.getRole())) {
 				case 0:
 					new HomeView(view.getStage(), user);

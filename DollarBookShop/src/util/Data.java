@@ -152,5 +152,19 @@ public class Data {
 		
 		return products;
 	}
+	
+	public User getUserInstanceFromEmail(String email) {
+		try {
+			ArrayList<User> users = getUserListData();
+			for (User user : users) {
+				if(user.getEmail().equals(email)) {
+					return user;
+				}
+			}
+		} catch(NullPointerException e) {
+			System.out.println("User not Found");
+		}
+		return null;
+	}
 
 }
