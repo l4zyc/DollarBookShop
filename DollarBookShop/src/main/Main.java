@@ -29,6 +29,7 @@ public class Main extends Application{
         String lastEmail = pref.get("lastEmail", null);
         if (lastEmail != null) {
             User user = data.getUserInstanceFromEmail(lastEmail);
+            pref.remove(lastEmail);
             new HomeView(stage, user);
         } else {
             new LoginView(stage);
