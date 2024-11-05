@@ -16,7 +16,7 @@ public abstract class func {
 		alert.showAndWait();
 	}
 
-	public static String getLastId() {
+	public static String getLastUserId() {
 		String query = "SELECT * FROM users "
 				+ "ORDER BY UserID "
 				+ "DESC LIMIT 1";

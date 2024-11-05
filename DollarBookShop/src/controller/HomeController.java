@@ -8,6 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -26,6 +29,18 @@ public class HomeController {
 		setOnAction();
 		setOnMouseEntered();
 		setOnMouseExited();
+	}
+	
+	public void setOnMouseClicked() {
+		view.getProduct_table().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				TableSelectionModel model = view.getProduct_table().getSelectionModel();
+				model.setSelectionMode(SelectionMode.SINGLE);
+				
+			}
+		});
 	}
 	
 	public void setOnAction() {
