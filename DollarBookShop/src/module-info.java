@@ -6,6 +6,7 @@ module DollarBookShop {
 	requires java.sql;
 	requires mysql.connector.java;
 	requires java.prefs;
+	requires jfxtras.labs;
 	
 	opens main to javafx.fxml, javafx.graphics;
 	opens model to javafx.base;
