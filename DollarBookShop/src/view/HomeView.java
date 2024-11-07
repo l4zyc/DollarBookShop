@@ -31,7 +31,6 @@ public class HomeView extends HomeViewTemplate {
 
     private Scene scene;
     private BorderPane mainLayout, homeLayout;
-    private User user;
     
     private TableView<Product> product_table;
     private TableColumn<Product, String> ProductID, ProductName, ProductGenre;
@@ -43,14 +42,12 @@ public class HomeView extends HomeViewTemplate {
     
     public HomeView(Stage stage, User user) {
         super(stage, user);
-        this.user = user;
-        
         
         start();
         setTable();
         arrangeComponent();
         startTypingAnimation();
-        new HomeController(this);
+        new HomeController(this, user);
     }
     
     public void setTable() {
@@ -183,10 +180,6 @@ public class HomeView extends HomeViewTemplate {
 
 	public User getUser() {
 		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public TableView<Product> getProduct_table() {

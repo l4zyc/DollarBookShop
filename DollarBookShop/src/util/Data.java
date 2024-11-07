@@ -166,5 +166,18 @@ public class Data {
 		}
 		return null;
 	}
+	
+	public void insertItemtoCart(User user, Product product, Integer qty) {
+		String query = String.format(
+				"INSERT INTO carts VALUES ("
+				+ " '%s', '%s', %d "
+				+ ")", user.getUserID(), product.getProductID(), qty);
+		
+		connect.execUpdate(query);
+	}
+	
+	
+	public void checkStock(Product product) {
 
+	}
 }

@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import jfxtras.labs.scene.control.window.Window;
 import main.Main;
 import model.Product;
+import model.User;
 import util.func;
 import view.HomeView;
 import view.LoginView;
@@ -28,8 +29,10 @@ public class HomeController {
 	private HomeView view;
 	private Product product;
 	private Preferences pref = Preferences.userNodeForPackage(Main.class);
+	private User user;
 	
-	public HomeController(HomeView view) {
+	public HomeController(HomeView view, User user) {
+		this.user = user;
 		this.view = view;
 		setOnMouseClicked();
 		setOnAction();
@@ -69,7 +72,7 @@ public class HomeController {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(product != null) {
-					new addProductWindow(product);
+					new addProductWindow(product, user);
 				} else {
 					func.showAlert(AlertType.WARNING, "Warning", "You need to select one product");
 				}

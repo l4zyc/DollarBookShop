@@ -9,7 +9,7 @@ import util.Data;
 
 public abstract class HomeViewTemplate extends viewTemplate{
 
-	private User user;
+	protected User user;
     protected MenuBar mb; 
     protected Menu actionMenu;
     protected MenuItem home, cart, logout;
