@@ -16,11 +16,10 @@ import util.func;
 import view.LoginView;
 import view.RegisterView;
 
-public class RegisterController {
+public class RegisterController extends Controller{
 	
 	private RegisterView view;
 	private Connect connect = Connect.getInstance();
-	private Data data = new Data();
 
 	public RegisterController(RegisterView view) {
 		this.view = view;
@@ -66,7 +65,7 @@ public class RegisterController {
 
 	
 	public void validateRegister() {
-		ArrayList<User> users = data.getUserListData();
+		ArrayList<User> users = getData().getUserListData();
 		String email = view.getEmailField().getText();
 		String username = view.getUsernameField().getText();
 		String password = view.getPasswdField().getText();
@@ -105,7 +104,7 @@ public class RegisterController {
 	
 		Date DOB = Date.valueOf(localDate);
 		
-		data.insertUser(new User(data.setNewUserID(), email, username, password, DOB, "user"));
+		getData().insertUser(new User(getData().setNewUserID(), email, username, password, DOB, "user"));
 		new LoginView(view.getStage());
 	}
 	
