@@ -18,6 +18,16 @@ public abstract class HomeViewTemplate extends viewTemplate{
 	public HomeViewTemplate(Stage stage, User user) {
 		super(stage);
 		this.user = user;
+		
+		initMenu();
+	}
+	
+	public void initMenu() {
+        mb = new MenuBar();
+        actionMenu = new Menu("Action");
+        home = new MenuItem("Home");
+        cart = new MenuItem("Cart");
+        logout = new MenuItem("Log Out");
 	}
 
 	public Data getData() {

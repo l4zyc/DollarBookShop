@@ -45,7 +45,6 @@ public class HomeView extends HomeViewTemplate {
         super(stage, user);
         this.user = user;
         
-        
         start();
         setTable();
         arrangeComponent();
@@ -90,12 +89,6 @@ public class HomeView extends HomeViewTemplate {
         
         welcomeLbl = new Label();
         welcomeLbl.setFont(Font.font("Arial", FontWeight.BOLD, 45));
-        
-        mb = new MenuBar();
-        actionMenu = new Menu("Action");
-        home = new MenuItem("Home");
-        cart = new MenuItem("Cart");
-        logout = new MenuItem("Log Out");
         
         addCartBtn = new Button("Add to Cart");
         
