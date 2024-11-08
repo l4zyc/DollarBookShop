@@ -25,7 +25,8 @@ public class Main extends Application{
 	}
 
 	@Override
-	public void start(Stage stage) throws Exception {	
+	public void start(Stage stage) throws Exception {
+		//Check if the User has logged in before
         String lastEmail = pref.get("lastEmail", null);
         if (lastEmail != null) {
             User user = data.getUserInstanceFromEmail(lastEmail);
@@ -35,6 +36,7 @@ public class Main extends Application{
             new LoginView(stage);
         }
 		
+        //Set the Dollar Book Shop Window
 		stage.setTitle("Dollar Book Shop");
 		stage.setResizable(false);
 		stage.setHeight(stage.getMaxHeight());

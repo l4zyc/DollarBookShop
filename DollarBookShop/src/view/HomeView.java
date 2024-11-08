@@ -50,6 +50,7 @@ public class HomeView extends HomeViewTemplate {
         new HomeController(this, user);
     }
     
+    //Assign and Set The Table
     public void setTable() {
     	product_table = new TableView<>();
     	
@@ -78,7 +79,8 @@ public class HomeView extends HomeViewTemplate {
     	
     	product_table.setItems(getData().getProductListData());
     }
-
+    
+    //Initialize The Components
     @Override
     public void start() {
         mainLayout = new BorderPane();
@@ -96,9 +98,12 @@ public class HomeView extends HomeViewTemplate {
         
         addCartBtn = new Button("Add to Cart");
         
+        //Set so that the Menu Item for home cannot be click again when in home 
+        //view
         home.setDisable(true);
     }
-
+    
+    //Arrange Each of the components
     @Override
     public void arrangeComponent() {
         mb.getMenus().add(actionMenu);
@@ -124,19 +129,29 @@ public class HomeView extends HomeViewTemplate {
         getStage().setScene(scene);
     }
     
+    //This is a typing animation when the User is in the home view
+    //This will type Welcome, [Name]
+    //Not Required
     private void startTypingAnimation() {
+    	//Start of with the base Text
         String baseText = "Welcome, ";
         String username = user.getUsername();
+        //Timeline Object
         Timeline timeline = new Timeline();
-
+        
+        //Will loop through the alphabet one by one till it reach the end
+        //each 200ms
         for (int i = 0; i <= username.length(); i++) {
             int index = i;
             KeyFrame keyFrame = new KeyFrame(Duration.millis(200 * i),
                     e -> welcomeLbl.setText(baseText + username.substring(0, index)));
+            //Add the keyframe to the timeline object
             timeline.getKeyFrames().add(keyFrame);
         }
         
-        
+        //After 2 seconds
+        //It will then start deleting the alphabet on the name one by one 
+        //every 200ms like before
         for (int i = username.length(); i >= 0; i--) {
             int index = i;
             KeyFrame keyFrame = new KeyFrame(Duration.millis(200 * username.length() + 2000 + 200 * (username.length() - i)), 
@@ -144,7 +159,9 @@ public class HomeView extends HomeViewTemplate {
             timeline.getKeyFrames().add(keyFrame);
         }
        
+        //To set so that it never stops
         timeline.setCycleCount(Timeline.INDEFINITE);
+        //Start the animation
         timeline.play();
     }
     
