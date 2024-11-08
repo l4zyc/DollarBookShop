@@ -71,11 +71,7 @@ public class HomeView extends HomeViewTemplate {
     	
     	product_table.getColumns().addAll(ProductID, ProductName, ProductGenre, ProductStock, ProductPrice);
     	
-    	ProductID.prefWidthProperty().bind(product_table.widthProperty().multiply(0.20));
-    	ProductName.prefWidthProperty().bind(product_table.widthProperty().multiply(0.20));
-    	ProductGenre.prefWidthProperty().bind(product_table.widthProperty().multiply(0.20));
-    	ProductStock.prefWidthProperty().bind(product_table.widthProperty().multiply(0.20));
-    	ProductPrice.prefWidthProperty().bind(product_table.widthProperty().multiply(0.20));
+    	product_table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     	
     	product_table.setItems(getData().getProductListData());
     }

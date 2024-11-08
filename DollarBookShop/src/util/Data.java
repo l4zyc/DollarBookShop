@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
+import model.Cart;
 import model.Product;
 import model.User;
 
@@ -176,8 +177,45 @@ public class Data {
 		connect.execUpdate(query);
 	}
 	
+	public ArrayList<Cart> getUserCartData(User user) {
+		String query = String.format(
+				"SELECT * FROM carts WHERE"
+				+ " UserID = '%s'", user.getUserID());
+		
+		connect.rs = connect.execQuery(query);
+		ArrayList<Cart> carts = new ArrayList<>();
+	
+		
+		try {
+			while(connect.rs.next()) {
+				String userID = connect.rs.getString("UserID");
+				String productID = connect.rs.getString("ProductID");
+				Integer qty = connect.rs.getInt("Quantity");
+				
+				carts.add(new Cart(userID, productID, qty));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return carts;
+	}
+
+	
+	public Integer checkIteminCart(User user, Product product) {
+		ArrayList<Cart> user_items = getUserCartData(user);
+		
+		for (Cart item : user_items) {
+			if(product.getProductID().equals(item.getProductID())) {
+				return item.getQty();
+			}
+		}
+		
+		return 0;
+	}
+	
 	
 	public void checkStock(Product product) {
-
+		
 	}
 }

@@ -18,8 +18,9 @@ import jfxtras.labs.scene.control.window.Window;
 import jfxtras.labs.scene.control.window.WindowIcon;
 import model.Product;
 import model.User;
+import util.Data;
 
-public class addProductWindow {
+public class addProductWindow{
 
 	Stage stage;
 	Scene scene;
@@ -35,6 +36,8 @@ public class addProductWindow {
 	Product product;
 	User user;
 
+	private Data data = new Data();
+	
 	public addProductWindow(Product product, User user) {
 		this.product = product;
 		this.user = user;
@@ -62,7 +65,7 @@ public class addProductWindow {
 		genreItemLbl = new Label(product.getGenre());
 		priceItemLbl = new Label(product.getPrice().toString());
 		
-		qty = new Spinner<Integer>(0, product.getStock(), 0);
+		qty = new Spinner<Integer>(0, product.getStock(), data.checkIteminCart(user, product));
 		addBtn = new Button("Add");
 	}
 
