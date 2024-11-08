@@ -1,6 +1,8 @@
 package view;
 
 import controller.addProductController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jfxtras.labs.internal.scene.control.skin.window.DefaultWindowIconSkin;
+import jfxtras.labs.scene.control.window.CloseIcon;
 import jfxtras.labs.scene.control.window.Window;
+import jfxtras.labs.scene.control.window.WindowIcon;
 import model.Product;
 import model.User;
 
@@ -79,6 +84,17 @@ public class addProductWindow {
 		
 		window.getContentPane().getChildren().add(mainLayout);
 		window.setTitle("Add to Cart");
+		CloseIcon close = new CloseIcon(window);
+		window.getRightIcons().add(close);
+		
+		close.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				stage.close();
+			}
+		});
 		
 		scene = new Scene(root, 400, 300);
 		stage.initStyle(StageStyle.UNDECORATED);

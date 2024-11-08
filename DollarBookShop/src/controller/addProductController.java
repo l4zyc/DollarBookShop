@@ -20,11 +20,23 @@ public class addProductController extends Controller{
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
+				if(isQtyless(view.getQty().getValue())) {
+					func.showAlert(AlertType.WARNING, "Warning", "Quantity is less than 0");
+					return;
+				}
 				getData().insertItemtoCart(view.getUser(), view.getProduct(), view.getQty().getValue());
+				
 				func.showAlert(AlertType.INFORMATION, "Cart", "Item Added");
 				view.getStage().close();
 			}
 		});
 	}
-
+	
+	public boolean isQtyless(Integer qty) {
+		if(qty <= 0) {
+			return true;
+		}
+		
+		return false;
+	}
 }
