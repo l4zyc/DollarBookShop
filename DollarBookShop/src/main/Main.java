@@ -11,7 +11,6 @@ import model.User;
 import util.Data;
 import view.HomeView;
 import view.LoginView;
-import view.RegisterView;
 
 public class Main extends Application{
 	
@@ -19,6 +18,10 @@ public class Main extends Application{
 	BorderPane mainLayout;
 	private Preferences pref = Preferences.userNodeForPackage(Main.class);
 	private Data data = new Data();
+	public static Stage mainStage;
+	
+	private double width = Screen.getPrimary().getBounds().getWidth();
+	private double height = Screen.getPrimary().getBounds().getHeight();
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -27,6 +30,8 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		//Check if the User has logged in before
+		mainStage = stage;
+		
         String lastEmail = pref.get("lastEmail", null);
         if (lastEmail != null) {
             User user = data.getUserInstanceFromEmail(lastEmail);
@@ -38,7 +43,8 @@ public class Main extends Application{
 		
         //Set the Dollar Book Shop Window
 		stage.setTitle("Dollar Book Shop");
-		stage.setMaximized(true);
+		stage.setWidth(width);
+		stage.setHeight(height);
 		stage.setResizable(false);
 		stage.show();
 	}

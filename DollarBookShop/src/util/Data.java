@@ -202,7 +202,7 @@ public class Data {
 	}
 
 	
-	public Integer checkIteminCart(User user, Product product) {
+	public Integer getItemQty(User user, Product product) {
 		ArrayList<Cart> user_items = getUserCartData(user);
 		
 		for (Cart item : user_items) {
@@ -214,8 +214,25 @@ public class Data {
 		return 0;
 	}
 	
-	
-	public void checkStock(Product product) {
+	public void updateCartQty(Cart cart) {
+		String query = String.format("UPDATE carts "
+				+ "SET Quantity = %d WHERE UserID = '%s' AND ProductID = '%s'",
+				cart.getQty(), cart.getUserID(), cart.getProductID());
 		
+		connect.execUpdate(query);
 	}
+	
+	public boolean inCart(User user, Product product) {
+		ArrayList<Cart> carts = getUserCartData(user);
+		
+		for (Cart item : carts) {
+			if(item.getProductID().equals(product.getProductID())) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
 }

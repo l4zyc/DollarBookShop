@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -34,6 +35,7 @@ public class HomeController {
 	public HomeController(HomeView view, User user) {
 		this.user = user;
 		this.view = view;
+		doubleClick();
 		setOnMouseClicked();
 		setOnAction();
 		setOnMouseEntered();
@@ -47,6 +49,21 @@ public class HomeController {
 			product = model.getSelectedItem();
 		});
 	}
+	
+	public void doubleClick() {
+		view.getProduct_table().setRowFactory(tv -> {
+			TableRow<Product> row = new TableRow<Product>();
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() == 2) {
+					Product data = row.getItem();
+					new addProductWindow(product, user);
+				}
+			});
+			
+			return row;
+		});
+	}	
+	
 	
 	public void setOnAction() {
 		view.getLogout().setOnAction(new EventHandler<ActionEvent>() {

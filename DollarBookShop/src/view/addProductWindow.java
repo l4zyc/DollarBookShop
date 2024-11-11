@@ -10,12 +10,14 @@ import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jfxtras.labs.internal.scene.control.skin.window.DefaultWindowIconSkin;
 import jfxtras.labs.scene.control.window.CloseIcon;
 import jfxtras.labs.scene.control.window.Window;
 import jfxtras.labs.scene.control.window.WindowIcon;
+import main.Main;
 import model.Product;
 import model.User;
 import util.Data;
@@ -65,7 +67,7 @@ public class addProductWindow{
 		genreItemLbl = new Label(product.getGenre());
 		priceItemLbl = new Label(product.getPrice().toString());
 		
-		qty = new Spinner<Integer>(0, product.getStock(), data.checkIteminCart(user, product));
+		qty = new Spinner<Integer>(0, product.getStock(), data.getItemQty(user, product));
 		addBtn = new Button("Add");
 	}
 
@@ -101,6 +103,8 @@ public class addProductWindow{
 		
 		scene = new Scene(root, 400, 300);
 		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initOwner(Main.mainStage);
+		stage.initModality(Modality.WINDOW_MODAL);
 		stage.setScene(scene);
 		stage.show();
 	}

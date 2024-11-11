@@ -2,6 +2,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
+import model.Cart;
 import util.func;
 import view.addProductWindow;
 
@@ -24,7 +25,13 @@ public class addProductController extends Controller{
 					func.showAlert(AlertType.WARNING, "Warning", "Quantity is less than 0");
 					return;
 				}
-				getData().insertItemtoCart(view.getUser(), view.getProduct(), view.getQty().getValue());
+				
+				if(getData().inCart(view.getUser(), view.getProduct())) {
+					getData().updateCartQty(new Cart(view.getUser().getUserID(),
+							view.getProduct().getProductID(), view.getQty().getValue()));
+				} else {
+					getData().insertItemtoCart(view.getUser(), view.getProduct(), view.getQty().getValue());
+				}
 				
 				func.showAlert(AlertType.INFORMATION, "Cart", "Item Added");
 				view.getStage().close();
