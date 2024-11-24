@@ -38,30 +38,30 @@ public class RegisterController extends Controller{
 		});
 	}
 	
-	public String newID() {
-		String query = "SELECT UserID FROM users "
-				+ "ORDER BY UserID "
-				+ "DESC LIMIT 1";
-		
-		connect.rs = connect.execQuery(query);
-		String ID = null;
-		
-		try {
-			if(!(connect.rs.next())) {
-				return "US001";
-			}
-			ID = connect.rs.getString("ID");
-			String IDnum = ID.substring(2);
-			Integer num = Integer.parseInt(IDnum) + 1;
-			ID = String.format("US%03d", num);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return ID;
-	}
+//	public String newID() {
+//		String query = "SELECT UserID FROM users "
+//				+ "ORDER BY UserID "
+//				+ "DESC LIMIT 1";
+//		
+//		connect.rs = connect.execQuery(query);
+//		String ID = null;
+//		
+//		try {
+//			if(!(connect.rs.next())) {
+//				return "US001";
+//			}
+//			ID = connect.rs.getString("ID");
+//			String IDnum = ID.substring(2);
+//			Integer num = Integer.parseInt(IDnum) + 1;
+//			ID = String.format("US%03d", num);
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return ID;
+//	}
 
 	
 	public void validateRegister() {

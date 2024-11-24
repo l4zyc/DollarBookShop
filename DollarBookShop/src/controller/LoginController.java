@@ -78,6 +78,7 @@ public class LoginController {
 					new HomeView(view.getStage(), user);
 					break;
 				case 1:
+					//Khusus admin
 					break;
 				default:
 					break;
