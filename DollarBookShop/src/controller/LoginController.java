@@ -16,6 +16,7 @@ import model.User;
 import util.Connect;
 import util.func;
 import view.HomeView;
+import view.HomeViewAdmin;
 import view.LoginView;
 import view.RegisterView;
 
@@ -78,7 +79,7 @@ public class LoginController {
 					new HomeView(view.getStage(), user);
 					break;
 				case 1:
-					//Khusus admin
+					new HomeViewAdmin(view.getStage(), user);
 					break;
 				default:
 					break;

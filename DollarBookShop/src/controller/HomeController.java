@@ -72,7 +72,7 @@ public class HomeController {
 			public void handle(ActionEvent event) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Log Out");
-				alert.setContentText("Do you want to Log out ?");
+				alert.setContentText("Do you want to log out ?");
 				
 				Optional op = alert.showAndWait();
 				

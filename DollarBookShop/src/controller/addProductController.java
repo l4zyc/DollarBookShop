@@ -22,18 +22,22 @@ public class addProductController extends Controller{
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(isQtyless(view.getQty().getValue())) {
-					func.showAlert(AlertType.WARNING, "Warning", "Quantity is less than 0");
+					func.showAlert(AlertType.WARNING, "Warning", "Quantity must be more than 0");
 					return;
 				}
 				
 				if(getData().inCart(view.getUser(), view.getProduct())) {
 					getData().updateCartQty(new Cart(view.getUser().getUserID(),
 							view.getProduct().getProductID(), view.getQty().getValue()));
+					func.showAlert(AlertType.INFORMATION, "Cart", "Product updated successfully");
+
 				} else {
 					getData().insertItemtoCart(view.getUser(), view.getProduct(), view.getQty().getValue());
+					func.showAlert(AlertType.INFORMATION, "Cart", "Product added successfully");
+
 				}
 				
-				func.showAlert(AlertType.INFORMATION, "Cart", "Item Added");
+//				func.showAlert(AlertType.INFORMATION, "Cart", "Item Added");
 				view.getStage().close();
 			}
 		});

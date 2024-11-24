@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import model.User;
 import util.Data;
 import view.HomeView;
+import view.HomeViewAdmin;
 import view.LoginView;
 
 public class Main extends Application{
@@ -21,7 +22,7 @@ public class Main extends Application{
 	public static Stage mainStage;
 	
 	private double width = Screen.getPrimary().getBounds().getWidth();
-	private double height = Screen.getPrimary().getBounds().getHeight();
+	private double height = Screen.getPrimary().getBounds().getHeight()-50;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -36,7 +37,12 @@ public class Main extends Application{
         if (lastEmail != null) {
             User user = data.getUserInstanceFromEmail(lastEmail);
             pref.remove(lastEmail);
-            new HomeView(stage, user);
+            
+            if(user.getRole().equals("user")) {
+            	new HomeView(stage, user);            	
+            }else if(user.getRole().equals("admin")){
+            	new HomeViewAdmin(stage, user);
+            }
         } else {
             new LoginView(stage);
         }
