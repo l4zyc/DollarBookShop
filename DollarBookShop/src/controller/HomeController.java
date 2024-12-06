@@ -5,6 +5,7 @@ import java.util.prefs.Preferences;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -21,6 +22,7 @@ import main.Main;
 import model.Product;
 import model.User;
 import util.func;
+import view.CartView;
 import view.HomeView;
 import view.LoginView;
 import view.addProductWindow;
@@ -82,6 +84,20 @@ public class HomeController {
 				}
 			}
 		});
+		
+		view.getCart().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+//				CartView cartView = new CartView(view.getStage(), user);
+//				Scene cartScene = new Scene(cartView.getMainLayout());
+//				view.getStage().setScene(cartScene);
+				new CartView(view.getStage(),user);
+			}
+			
+			
+		});
+		
 		
 		view.getAddCartBtn().setOnAction(new EventHandler<ActionEvent>() {
 

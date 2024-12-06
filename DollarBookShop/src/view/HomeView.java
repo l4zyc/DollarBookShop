@@ -92,6 +92,7 @@ public class HomeView extends HomeViewTemplate {
         //Set so that the Menu Item for home cannot be click again when in home 
         //view
         home.setDisable(true);
+      
     }
     
     //Arrange Each of the components
@@ -99,7 +100,7 @@ public class HomeView extends HomeViewTemplate {
     public void arrangeComponent() {
         mb.getMenus().add(actionMenu);
         actionMenu.getItems().addAll(home, cart, logout);
-        
+       
         addCartBtn.setTextFill(Color.WHITE);
         addCartBtn.setBackground(new Background(
         		new BackgroundFill(Color.DARKGRAY, null, null)));

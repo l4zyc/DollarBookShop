@@ -2,12 +2,14 @@ package util;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
 import model.Cart;
+import model.CartItem;
 import model.Product;
 import model.User;
 
@@ -23,6 +25,33 @@ public class Data {
 		connect.execUpdate(query);
 		func.showAlert(AlertType.INFORMATION, "User", "User Added!");
 	}
+	
+	public String transactionDate() {
+		LocalDate currentDate = LocalDate.now();
+		return currentDate.toString();
+	}
+	
+	public void insertTransaction(User user, CartItem carts) {
+		String ID = setNewTransactionID();
+		
+		String transactionDate = transactionDate();
+		
+		String query = String.format("INSERT INTO transaction_headers VALUES ('%s', '%s','%s')", ID, user.getUserID(), transactionDate);
+		connect.execUpdate(query);
+		
+		String query2 = String.format("INSERT INTO transaction_details VALUES ('%s','%s',%d)", ID,carts.getProductId(),carts.getQty());
+		connect.execUpdate(query2);
+			
+		String updateStock = String.format("UPDATE products SET Stock = Stock - %d WHERE ProductID = '%s'", carts.getQty(),carts.getProductId());
+			
+		connect.execUpdate(updateStock);
+		
+		
+
+	}
+	
+	
+	
 	
 	public User getUserData(String email, String password) throws NullPointerException { 
 		
@@ -79,6 +108,7 @@ public class Data {
 		return users;
 	}
 	
+	
 	public String setNewUserID() {
 		String ID = null;
 		String query = "SELECT UserID FROM users "
@@ -98,6 +128,33 @@ public class Data {
 			ID = String.format("US%03d", (num + 1));
 			
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ID;
+	}
+	
+	public String setNewTransactionID() {
+		String ID = null;
+		String query = "SELECT TransactionID FROM transaction_headers ORDER BY TransactionID DESC LIMIT 1";
+		
+		connect.rs = connect.execQuery(query);
+		
+		try {
+			if(!connect.rs.next()) {
+				return "TR001";
+			}
+			
+			ID = connect.rs.getString("TransactionID");
+			
+			Integer num = Integer.parseInt(ID.substring(2));
+			
+			ID = String.format("TR%03d", num + 1);
+			
+			
+			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -153,6 +210,39 @@ public class Data {
 		
 		return products;
 	}
+	
+	public ObservableList<CartItem> getCartListData(User user){
+	    String query = "SELECT c.ProductID, p.Name, p.Genre, p.Price, c.Quantity, (p.Price * c.Quantity) AS TotalPrice " +
+                "FROM carts c JOIN products p ON c.ProductID = p.ProductID WHERE c.UserID = '" + user.getUserID() + "'";
+	    ObservableList<CartItem> cartItems =  FXCollections.observableArrayList();
+	    
+	    connect.rs = connect.execQuery(query);
+	    
+	    try {
+	    	while (connect.rs.next()) {
+	    		   String productId = connect.rs.getString("ProductID");
+	               String name = connect.rs.getString("Name");
+	               String genre = connect.rs.getString("Genre");
+	               int price = connect.rs.getInt("Price");
+	               int qty = connect.rs.getInt("Quantity");
+	               int total = connect.rs.getInt("TotalPrice");
+	               
+	               cartItems.add(new CartItem(productId, name, genre, price, qty, total));
+				
+			}
+         
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    
+	    
+	    return cartItems;
+	    
+	    
+	}
+	
 	
 	public User getUserInstanceFromEmail(String email) {
 		try {
@@ -218,6 +308,33 @@ public class Data {
 		String query = String.format("UPDATE carts "
 				+ "SET Quantity = %d WHERE UserID = '%s' AND ProductID = '%s'",
 				cart.getQty(), cart.getUserID(), cart.getProductID());
+		
+		connect.execUpdate(query);
+	}
+	
+	public void updateCartItemQty(String ProductID, User user, int newQty) {
+		String query = String.format("UPDATE carts SET quantity = %d WHERE UserID = '%s' AND ProductID = '%s'",
+				newQty, user.getUserID(), ProductID);
+		
+		connect.execUpdate(query);
+	}
+
+	
+	public void setQtyCart(User user,String ProductID, int newQty) {
+		ObservableList<CartItem> cartItems = getCartListData(user);
+		for(CartItem item : cartItems) {
+			if(item.getProductId().equals(ProductID)) {
+				item.setQty(newQty);
+				
+				int newTotal = item.getPrice()*newQty;
+				updateCartItemQty(ProductID, user, newQty);
+			}
+			
+		}
+	}
+
+	public void deleteCartItem(CartItem carts, User user) {
+		String query = String.format("DELETE FROM carts WHERE UserID = '%s' AND ProductID = '%s'",user.getUserID(),carts.getProductId());
 		
 		connect.execUpdate(query);
 	}
