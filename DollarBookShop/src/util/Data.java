@@ -352,4 +352,34 @@ public class Data {
 	}
 	
 	
+	
+	
+	public void addNewProduct(Product product) {
+		String ID = setNewProductID();
+		
+		String query = String.format("INSERT INTO products VALUES ("
+				+ "'%s' '%s' '%s' '%d' '%d')", ID, product.getName(), product.getGenre(), product.getStock(), product.getPrice());
+		
+		connect.execQuery(query);
+	}
+	
+	public void updateProduct(Product product) {
+		String query = String.format("UPDATE products"
+				+ "SET Name = '%s', Genre = '%s', Stock = '%d', Price = '%d'"
+				+ "WHERE ProductID = '%s'", product.getName(), product.getGenre(), product.getStock(), product.getPrice(), product.getProductID());
+	}
+	
+	public void removeProductFromSomeoneCart(Product product) {
+		String query = String.format("DELETE FROM carts WHERE ProductID = '%s'",product.getProductID());
+		
+		connect.execUpdate(query);
+	}
+	
+	public void removeProduct(Product product) {
+		String query = String.format("DELETE FROM products WHERE ProductID = '%s'", product.getProductID());
+		
+		connect.execUpdate(query);
+	}
+	
+	
 }

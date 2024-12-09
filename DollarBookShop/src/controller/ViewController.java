@@ -97,7 +97,7 @@ public class ViewController extends Controller{
 					CartItem selectedItem = view.getCartTable().getSelectionModel().getSelectedItem();
 					view.getCartTable().getItems().remove(selectedItem);
 					getData().deleteCartItem(selectedItem, user);
-					func.showAlert(AlertType.INFORMATION, "Success", "Item removed suyccessfully");
+					func.showAlert(AlertType.INFORMATION, "Success", "Item removed successfully");
 					cart = null;
 				}else {
 					func.showAlert(AlertType.WARNING, "Warning", "No item selected to remove.");
@@ -115,7 +115,7 @@ public class ViewController extends Controller{
 					int newQty = view.getQuantitySpinner().getValue();
 					System.out.println("New : " + newQty);
 					if(newQty <= 0) {
-						func.showAlert(AlertType.WARNING, "Invalid quantity", "Quantitiy must be more than 0.");
+						func.showAlert(AlertType.WARNING, "Invalid quantity", "Quantity must be more than 0.");
 						return;
 					}
 					
