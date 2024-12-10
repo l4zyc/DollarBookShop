@@ -51,7 +51,7 @@ public class Main extends Application{
 		stage.setTitle("Dollar Book Shop");
 		stage.setWidth(width);
 		stage.setHeight(height);
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 	}
 

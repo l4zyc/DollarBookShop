@@ -24,40 +24,44 @@ public class Connect {
 	public ResultSet rs;
 	public java.sql.ResultSetMetaData rsm;
 	
+	// Singleton pattern untuk mendapatkan instance Connect
 	public static Connect getInstance() {
 		if(connect == null) return new Connect();
 		
 		return connect;
 	}
 	
+	// Konstruktor untuk inisialisasi koneksi
 	public Connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(CONNECTION, USERNAME, PASSWORD);
 			st = con.createStatement();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Jika terjadi exception, tampilkan error
 			e.printStackTrace();
 		}
 	}
 	
+	// Menjalankan SELECT query dan mengembalikan ResultSet
 	public ResultSet execQuery(String query) {
 		try {
 			rs = st.executeQuery(query);
 			rsm = rs.getMetaData();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Handle exception saat eksekusi query SELECT
 			e.printStackTrace();
 		}
 		
 		return rs;
 	}
 	
+	// Menjalankan query UPDATE, INSERT, DELETE
 	public void execUpdate(String query) {
 		try {
 			st.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Handle exception saat eksekusi query UPDATE/INSERT/DELETE
 			e.printStackTrace();
 		}
 	}

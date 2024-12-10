@@ -355,18 +355,19 @@ public class Data {
 	
 	
 	public void addNewProduct(Product product) {
-		String ID = setNewProductID();
-		
+//		String ID = setNewProductID();
 		String query = String.format("INSERT INTO products VALUES ("
-				+ "'%s' '%s' '%s' '%d' '%d')", ID, product.getName(), product.getGenre(), product.getStock(), product.getPrice());
+				+ "'%s', '%s', '%s', '%d', '%d')", product.getProductID(), product.getName(), product.getGenre(), product.getStock(), product.getPrice());
 		
-		connect.execQuery(query);
+		connect.execUpdate(query);
 	}
 	
 	public void updateProduct(Product product) {
-		String query = String.format("UPDATE products"
-				+ "SET Name = '%s', Genre = '%s', Stock = '%d', Price = '%d'"
+		String query = String.format("UPDATE products "
+				+ "SET Name = '%s', Genre = '%s', Stock = %d, Price = %d "
 				+ "WHERE ProductID = '%s'", product.getName(), product.getGenre(), product.getStock(), product.getPrice(), product.getProductID());
+		
+		connect.execUpdate(query);
 	}
 	
 	public void removeProductFromSomeoneCart(Product product) {
