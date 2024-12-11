@@ -3,6 +3,7 @@ package controller;
 import java.util.Optional;
 import java.util.prefs.Preferences;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,10 +36,14 @@ public class ViewController extends Controller{
 	private CartItem cart;
 	private Preferences pref = Preferences.userNodeForPackage(Main.class);
 	private User user;
+//	private ObservableList<CartItem> selectedItems;
 	
 	public ViewController(CartView view, User user) {
 		this.user = user;
 		this.view = view;
+		
+//		selectedItems = FXCollections.observableArrayList();
+
 		setOnMouseClicked();
 		setOnAction();
 	}
@@ -47,7 +52,22 @@ public class ViewController extends Controller{
 		view.getCartTable().setOnMouseClicked(e -> {
 			TableSelectionModel<CartItem> carts = view.getCartTable().getSelectionModel();
 			carts.setSelectionMode(SelectionMode.SINGLE);
+			
+			
+			//coba-coba:
+//			selectedItems.clear();
+//			selectedItems.setAll(carts.getSelectedItems());
+			
 			cart = carts.getSelectedItem();
+			
+			view.getQuantitySpinner().getValueFactory().setValue(cart.getQty());
+			
+//			if(!selectedItems.isEmpty()) {
+//				CartItem firstSelectedItem = selectedItems.get(0);
+//				view.getQuantitySpinner().getValueFactory().setValue(firstSelectedItem.getQty());
+//			} else {
+//				view.getQuantitySpinner().getValueFactory().setValue(0);
+//			}
 		});
 		
 	}
@@ -103,6 +123,18 @@ public class ViewController extends Controller{
 					func.showAlert(AlertType.WARNING, "Warning", "No item selected to remove.");
 				}
 				
+//				if(selectedItems.size() == 1) {
+//					CartItem selectedItem = selectedItems.get(0);
+//					view.getCartTable().getItems().remove(selectedItem);
+//					getData().deleteCartItem(selectedItem, user);
+//					func.showAlert(AlertType.INFORMATION, "Success", "Item removed successfully");
+//					cart = null;
+//				}else if (selectedItems.size()>1){
+//					func.showAlert(AlertType.WARNING, "Warning", "Must select only 1 item to remove.");
+//				}else {
+//					func.showAlert(AlertType.WARNING, "Warning", "No item selected to remove.");
+//				}
+				
 			}
 			
 		});
@@ -130,6 +162,28 @@ public class ViewController extends Controller{
 					func.showAlert(AlertType.WARNING, "No Selection", "Please select a book to update");
 				}
 				
+//				if(selectedItems.size() == 1) {
+//					int newQty = view.getQuantitySpinner().getValue();
+//					System.out.println("New : " + newQty);
+//					if(newQty <= 0) {
+//						func.showAlert(AlertType.WARNING, "Invalid quantity", "Quantity must be more than 0.");
+//						return;
+//					}
+//					CartItem selectedItem = selectedItems.get(0);
+//					
+//					selectedItem.setQty(newQty);
+//					selectedItem.setTotal(selectedItem.getQty()*selectedItem.getPrice());
+//					getData().setQtyCart(user, selectedItem.getProductId(), newQty);
+//					
+//					view.getCartTable().refresh();
+//					func.showAlert(AlertType.INFORMATION, "Success", "The book's quantity has been updated successfully.");
+//					
+//				}else if (selectedItems.size()>1){
+//					func.showAlert(AlertType.WARNING, "Warning", "Must select only 1 book to update.");
+//				}else  {
+//					func.showAlert(AlertType.WARNING, "No Selection", "Please select a book to update");
+//				}
+				
 			}
 			
 			
@@ -152,6 +206,22 @@ public class ViewController extends Controller{
 				}else {
 					func.showAlert(AlertType.WARNING, "No Selection", "Please select a book to checkout");
 				}
+				
+//				if(!selectedItems.isEmpty()) {
+//					CartItem selectedItem = view.getCartTable().getSelectionModel().getSelectedItem();
+//					getData().insertTransactionVersiAlternative(user, selectedItems);
+//					view.getCartTable().getItems().removeAll(selectedItems);	
+//					getData().deleteCartItemVersiAlternatve(selectedItems, user);
+//					
+//					view.getCartTable().refresh();
+//					
+//					func.showAlert(AlertType.INFORMATION, "Success", "Checkout successful for the selected item!");
+//					return;
+//				}else {
+//					func.showAlert(AlertType.WARNING, "No Selection", "Please select a book to checkout");
+//				}
+				
+				
 				
 			}
 			

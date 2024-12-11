@@ -50,6 +50,25 @@ public class Data {
 
 	}
 	
+//	public void insertTransactionVersiAlternative(User user, ObservableList<CartItem> carts) {
+//		String ID = setNewTransactionID();
+//		
+//		String transactionDate = transactionDate();
+//		
+//		String headerQuery = String.format("INSERT INTO transaction_headers VALUES ('%s', '%s','%s')", ID, user.getUserID(), transactionDate);
+//		connect.execUpdate(headerQuery);
+//		
+//		for (CartItem cart: carts) {
+//			String detailQuery = String.format("INSERT INTO transaction_details VALUES ('%s','%s',%d)", ID,cart.getProductId(),cart.getQty());
+//			connect.execUpdate(detailQuery);
+//			
+//			String updateStock = String.format("UPDATE products SET Stock = Stock - %d WHERE ProductID = '%s'", cart.getQty(),cart.getProductId());
+//			connect.execUpdate(updateStock);
+//				
+//		}
+//		
+//	}
+	
 	
 	
 	
@@ -338,6 +357,7 @@ public class Data {
 		
 		connect.execUpdate(query);
 	}
+	
 	
 	public boolean inCart(User user, Product product) {
 		ArrayList<Cart> carts = getUserCartData(user);
