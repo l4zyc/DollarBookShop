@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import model.User;
 import util.Connect;
 import util.Data;
@@ -35,7 +36,19 @@ public class RegisterController extends Controller{
 				// TODO Auto-generated method stub
 				validateRegister();
 			}
+			
 		});
+		view.getAccountExistLbl().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				new LoginView(view.getStage());
+				
+			}
+
+
+		});
+		
 	}
 	
 //	public String newID() {

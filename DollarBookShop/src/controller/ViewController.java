@@ -13,6 +13,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableSelectionModel;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +26,7 @@ import main.Main;
 import model.CartItem;
 import model.Product;
 import model.User;
+import util.Data;
 import util.func;
 import view.CartView;
 import view.HomeView;
@@ -36,6 +39,8 @@ public class ViewController extends Controller{
 	private CartItem cart;
 	private Preferences pref = Preferences.userNodeForPackage(Main.class);
 	private User user;
+	private Data data = new Data();
+
 //	private ObservableList<CartItem> selectedItems;
 	
 	public ViewController(CartView view, User user) {
@@ -52,16 +57,28 @@ public class ViewController extends Controller{
 		view.getCartTable().setOnMouseClicked(e -> {
 			TableSelectionModel<CartItem> carts = view.getCartTable().getSelectionModel();
 			carts.setSelectionMode(SelectionMode.SINGLE);
-			
-			
+
 			//coba-coba:
 //			selectedItems.clear();
 //			selectedItems.setAll(carts.getSelectedItems());
 			
 			cart = carts.getSelectedItem();
 			
-			view.getQuantitySpinner().getValueFactory().setValue(cart.getQty());
+			//view.getQuantitySpinner().getValueFactory().setValue(cart.getQty());
 			
+		
+	        Product product = data.getProductId(cart.getProductId());
+	        
+	        if(product!=null) {
+	        	int maxstock = product.getStock();
+	        	int currentQty = data.getItemQty(user, product);
+	        	
+	        	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxstock, currentQty);
+	        	view.getQuantitySpinner().setValueFactory(valueFactory);
+	        }
+
+
+	        
 //			if(!selectedItems.isEmpty()) {
 //				CartItem firstSelectedItem = selectedItems.get(0);
 //				view.getQuantitySpinner().getValueFactory().setValue(firstSelectedItem.getQty());
@@ -72,6 +89,7 @@ public class ViewController extends Controller{
 		
 	}
 	
+
 
 	
 	public void setOnAction() {

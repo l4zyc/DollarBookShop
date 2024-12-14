@@ -144,7 +144,7 @@ public class HomeViewAdmin extends HomeViewAdminTemplate {
 
     //This is a typing animation when the User is in the home view Admin
     private void startTypingAnimation() {
-        String baseText = "Welcome, ";
+        String baseText = "Welcome Back, ";
         String username = user.getUsername();
         Timeline timeline = new Timeline();
 

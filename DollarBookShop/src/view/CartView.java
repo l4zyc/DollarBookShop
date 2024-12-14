@@ -14,9 +14,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -31,6 +33,7 @@ import javafx.util.Duration;
 import model.CartItem;
 import model.Product;
 import model.User;
+import util.Data;
 
 public class CartView extends HomeViewTemplate{
 
@@ -47,11 +50,13 @@ public class CartView extends HomeViewTemplate{
 	private ObservableList<CartItem> cartItem;
 	
     private Label cartLbl;
-
-	public CartView(Stage stage, User user) {
+    
+    private Data data = new Data();
+    Product product;
+	public CartView(Stage stage, User user, Product product) {
 		super(stage, user);
 		this.user = user;
-		
+		this.product = product;
 		start();
 		setTable();
 		arrangeComponent();
@@ -90,7 +95,9 @@ public class CartView extends HomeViewTemplate{
 	
 	public void setTable() {
 		cartTable = new TableView<>();
-    	
+		TableViewSelectionModel<CartItem> selectionModel = cartTable.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+		
 		productIdColumn = new TableColumn<>("ID");
 		productIdColumn.setCellValueFactory(new PropertyValueFactory<CartItem, String>("ProductId"));
     	
@@ -136,11 +143,15 @@ public class CartView extends HomeViewTemplate{
 
 	        cartLayout.setCenter(cartTable);
 	        
-	        quantitySpinner = new Spinner<Integer>(1,100,1);
+	
+	        quantitySpinner = new Spinner<>(1, 100 ,1);
 	        quantitySpinner.setPrefWidth(100);
 	 
 	        
 	        HBox buttonBox = new HBox(20, removeBtn, checkoutBtn, updateBtn);
+	        
+
+	        
 	        
 	        VBox vBox = new VBox(quantitySpinner,buttonBox);
 	        vBox.setAlignment(Pos.BOTTOM_LEFT);

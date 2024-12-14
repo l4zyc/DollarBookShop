@@ -126,7 +126,7 @@ public class HomeView extends HomeViewTemplate {
     //Not Required
     private void startTypingAnimation() {
     	//Start of with the base Text
-        String baseText = "Welcome, ";
+        String baseText = "Hello, ";
         String username = user.getUsername();
         //Timeline Object
         Timeline timeline = new Timeline();

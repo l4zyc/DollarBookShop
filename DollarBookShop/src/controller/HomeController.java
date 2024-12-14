@@ -92,7 +92,7 @@ public class HomeController {
 //				CartView cartView = new CartView(view.getStage(), user);
 //				Scene cartScene = new Scene(cartView.getMainLayout());
 //				view.getStage().setScene(cartScene);
-				new CartView(view.getStage(),user);
+				new CartView(view.getStage(),user,product);
 			}
 			
 			

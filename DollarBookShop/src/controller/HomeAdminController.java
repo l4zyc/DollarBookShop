@@ -69,6 +69,23 @@ public class HomeAdminController extends Controller {
                 String name = view.getNameTF().getText().trim();
                 String genre = view.getGenreTF().getText().trim();
             
+
+                if (name.isEmpty()) {
+                    func.showAlert(AlertType.WARNING, "Invalid Input", "Name cannot be empty.");
+                    return;
+                }
+                
+                if (genre.isEmpty()) {
+                    func.showAlert(AlertType.WARNING, "Invalid Input", "Genre cannot be empty.");
+                    return;
+                }
+                
+                int price1 = Integer.parseInt(priceText);
+                if (price1 < 1000) {
+                    func.showAlert(AlertType.WARNING, "Invalid Input", "Price must be at least 1000.");
+                    return;
+                }
+                
                 if (stock <= 0) {
                     func.showAlert(AlertType.WARNING, "Invalid Input", "Stock must be more than 0.");
                     return;
@@ -85,21 +102,6 @@ public class HomeAdminController extends Controller {
                     return;
                 }
           
-                if (name.isEmpty()) {
-                    func.showAlert(AlertType.WARNING, "Invalid Input", "Name cannot be empty.");
-                    return;
-                }
-                
-                if (genre.isEmpty()) {
-                    func.showAlert(AlertType.WARNING, "Invalid Input", "Genre cannot be empty.");
-                    return;
-                }
-                
-                int price1 = Integer.parseInt(priceText);
-                if (price1 < 1000) {
-                    func.showAlert(AlertType.WARNING, "Invalid Input", "Price must be at least 1000.");
-                    return;
-                }
 
                 product.setName(name);
                 product.setGenre(genre);

@@ -230,6 +230,9 @@ public class Data {
 		return products;
 	}
 	
+	
+	
+	
 	public ObservableList<CartItem> getCartListData(User user){
 	    String query = "SELECT c.ProductID, p.Name, p.Genre, p.Price, c.Quantity, (p.Price * c.Quantity) AS TotalPrice " +
                 "FROM carts c JOIN products p ON c.ProductID = p.ProductID WHERE c.UserID = '" + user.getUserID() + "'";
@@ -323,6 +326,44 @@ public class Data {
 		return 0;
 	}
 	
+	
+	public Product getProductId(String productId) {
+		ObservableList<Product> productList = getProductListData();
+		
+		for (Product product : productList) {
+			if(product.getProductID().equals(productId)) {
+				return product;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Product getProductById(String productId) {
+	    String query = String.format("SELECT * FROM products WHERE ProductID = '%s'", productId);
+	    connect.rs = connect.execQuery(query);
+	    
+	    Product product = null;
+	    
+	    try {
+	        if (connect.rs.next()) {
+	            String ID = connect.rs.getString("ProductID");
+	            String name = connect.rs.getString("Name");
+	            String genre = connect.rs.getString("Genre");
+	            int stock = connect.rs.getInt("Stock");
+	            int price = connect.rs.getInt("Price");
+	            
+	            product = new Product(ID, name, genre, stock, price);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return product;
+	}
+
+	
+
 	public void updateCartQty(Cart cart) {
 		String query = String.format("UPDATE carts "
 				+ "SET Quantity = %d WHERE UserID = '%s' AND ProductID = '%s'",
